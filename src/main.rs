@@ -51,7 +51,6 @@ fn eval_node(node: Node, source: &str, ctx: &mut PracticeContext) -> Result<f64>
             let rhs = node.child_by_field_name("rhs").unwrap();
             let rhs = eval_node(rhs, source, ctx)?;
 
-            dbg!(&lhs, &rhs);
             ctx.variables.insert(lhs, rhs);
 
             Ok(rhs)
