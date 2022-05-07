@@ -1,0 +1,19 @@
+===============
+expression test
+===============
+
+-1 * 2 ** 3 / (4 + 1)
+
+---
+
+(source_file
+    (binary_expression
+    (binary_expression
+        (unary_expression
+        (number))
+        (binary_expression
+        (number)
+        (number)))
+    (binary_expression
+        (number)
+        (number))))
