@@ -5,6 +5,26 @@
       "type": "SYMBOL",
       "name": "_statement"
     },
+    "block_comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "{"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^}]*"
+          },
+          {
+            "type": "STRING",
+            "value": "}"
+          }
+        ]
+      }
+    },
     "_statement": {
       "type": "CHOICE",
       "members": [
@@ -326,7 +346,11 @@
   "extras": [
     {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "\\s|\\\\\\r?\\n"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "block_comment"
     }
   ],
   "conflicts": [],

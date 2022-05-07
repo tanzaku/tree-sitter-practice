@@ -1,8 +1,15 @@
 module.exports = grammar({
     name: 'practice',
 
+    extras: $ => [
+        /\s|\\\r?\n/,   // extrasを定義する場合は、空白にマッチするパターンを明示的に指定する必要がある
+        $.block_comment
+    ],
+
     rules: {
         source_file: $ => $._statement,
+
+        block_comment: $ => token(seq('{', /[^}]*/, '}')),
 
         _statement: $ => choice(
             $.assignment,

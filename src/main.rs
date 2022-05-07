@@ -116,5 +116,6 @@ mod tests {
 
         assert_eq!(eval("x=2**3+1", &mut ctx).unwrap(), 9.0);
         assert_eq!(eval("x*x", &mut ctx).unwrap(), 81.0);
+        assert_eq!(eval("x{コメントテスト}*x", &mut ctx).unwrap(), 81.0);
     }
 }

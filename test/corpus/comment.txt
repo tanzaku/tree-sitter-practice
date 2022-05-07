@@ -1,0 +1,17 @@
+===============
+comment
+===============
+
+x=2**{0}3+1
+
+---
+
+    (source_file
+      (assignment
+        (identifier)
+        (binary_expression
+          (binary_expression
+            (number)
+            (block_comment)
+            (number))
+          (number))))
