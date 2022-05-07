@@ -14,10 +14,10 @@ module.exports = grammar({
             $.binary_expression
         ),
 
-        unary_expression: $ => choice(
+        unary_expression: $ => prec(1, choice(
             seq('+', $._expression),
             seq('-', $._expression)
-        ),
+        )),
 
         binary_expression: $ => choice(
             seq($._expression, '*', $._expression),
