@@ -6,14 +6,15 @@ expression test
 
 ---
 
-(source_file
-    (binary_expression
-    (binary_expression
-        (unary_expression
-        (number))
+    (source_file
+      (binary_expression
         (binary_expression
-        (number)
-        (number)))
-    (binary_expression
-        (number)
-        (number))))
+          (unary_expression
+            (number))
+          (binary_expression
+            (number)
+            (number)))
+        (parentheses_expression
+          (binary_expression
+            (number)
+            (number)))))

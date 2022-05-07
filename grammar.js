@@ -4,11 +4,15 @@ module.exports = grammar({
     rules: {
         source_file: $ => $._statement,
 
-        _statement: $ => prec(1, choice(
+        _statement: $ => choice(
+            $.assignment,
             $._expression
-        )),
+        ),
+
+        assignment: $ => prec(5, seq(field('lhs', $.identifier), '=', field('rhs', $._expression))),
 
         _expression: $ => choice(
+            $.identifier,
             $.number,
             $.unary_expression,
             $.binary_expression,
@@ -30,6 +34,8 @@ module.exports = grammar({
             prec.left(3, seq(field('lhs', $._expression), field('op', '**'), field('rhs', $._expression))),
         ),
 
-        number: $ => /\d+/
+        number: $ => /\d+/,
+
+        identifier: $ => /[a-z_]+/
     }
 });

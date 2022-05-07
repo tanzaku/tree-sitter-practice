@@ -6,14 +6,43 @@
       "name": "_statement"
     },
     "_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "assignment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        }
+      ]
+    },
+    "assignment": {
       "type": "PREC",
-      "value": 1,
+      "value": 5,
       "content": {
-        "type": "CHOICE",
+        "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "_expression"
+            "type": "FIELD",
+            "name": "lhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "="
+          },
+          {
+            "type": "FIELD",
+            "name": "rhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
           }
         ]
       }
@@ -21,6 +50,10 @@
     "_expression": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
         {
           "type": "SYMBOL",
           "name": "number"
@@ -284,6 +317,10 @@
     "number": {
       "type": "PATTERN",
       "value": "\\d+"
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-z_]+"
     }
   },
   "extras": [
