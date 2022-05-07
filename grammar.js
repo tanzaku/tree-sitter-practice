@@ -12,7 +12,7 @@ module.exports = grammar({
             $.number,
             $.unary_expression,
             $.binary_expression,
-            '(', $._expression, ')'
+            seq('(', $._expression, ')')
         ),
 
         unary_expression: $ => prec(4, choice(
