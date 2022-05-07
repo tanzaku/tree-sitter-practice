@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<body>
+<script src="tree-sitter.js"></script>
+
+
+<textarea id="program" rows="10" cols="30">
+</textarea>
+
+<p id="cst"></p>
+
+<script>
+    let Practice;
+    const Parser = window.TreeSitter;
+
+    Parser.init().then(async () => {
+        Practice = await Parser.Language.load('tree-sitter-practice.wasm');
+        return Practice;
+    });
+
+    const e = document.getElementById('program');
+    const cst = document.getElementById('cst');
+
+    e.addEventListener('change', (event) => {
+        const parser = new Parser();
+        parser.setLanguage(Practice);
+        const tree = parser.parse(event.target.value);
+        cst.innerText = tree.rootNode.toString();
+        parser.delete();
+    });
+
+    </script>
+    
+</body>
+
+</html>
+
