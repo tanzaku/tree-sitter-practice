@@ -12,20 +12,22 @@ module.exports = grammar({
             $.number,
             $.unary_expression,
             $.binary_expression,
-            seq('(', $._expression, ')')
+            $.parentheses_expression
         ),
 
+        parentheses_expression: $ => seq('(', field('expr', $._expression), ')'),
+
         unary_expression: $ => prec(4, choice(
-            seq('+', $._expression),
-            seq('-', $._expression)
+            seq(field('op', '+'), field('expr', $._expression)),
+            seq(field('op', '-'), field('expr', $._expression))
         )),
 
         binary_expression: $ => choice(
-            prec.left(2, seq($._expression, '*', $._expression)),
-            prec.left(2, seq($._expression, '/', $._expression)),
-            prec.left(1, seq($._expression, '+', $._expression)),
-            prec.left(1, seq($._expression, '-', $._expression)),
-            prec.left(3, seq($._expression, '**', $._expression)),
+            prec.left(2, seq(field('lhs', $._expression), field('op', '*'), field('rhs', $._expression))),
+            prec.left(2, seq(field('lhs', $._expression), field('op', '/'), field('rhs', $._expression))),
+            prec.left(1, seq(field('lhs', $._expression), field('op', '+'), field('rhs', $._expression))),
+            prec.left(1, seq(field('lhs', $._expression), field('op', '-'), field('rhs', $._expression))),
+            prec.left(3, seq(field('lhs', $._expression), field('op', '**'), field('rhs', $._expression))),
         ),
 
         number: $ => /\d+/
