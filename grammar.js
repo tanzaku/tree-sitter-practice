@@ -2,7 +2,7 @@ module.exports = grammar({
     name: 'practice',
 
     rules: {
-        source_file: $ => repeat($._statement),
+        source_file: $ => $._statement,
 
         _statement: $ => choice(
             $._expression
